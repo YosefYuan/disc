@@ -2,15 +2,15 @@
   <div>
     <p>{{ msg }}</p>
     <template v-for="(v, i) in selectionData">
-      <p class="quesNum">第{{i + 1}}题</p>
+      <p :key="i" class="quesNum">第{{i + 1}}题</p>
       <div :key="i">
         <ul class="selection">
-          <li v-for="(v1, i1) in selectionData[i]">{{v1}}</li>
+          <li :key="i1" v-for="(v1, i1) in v">{{v1}}</li>
         </ul>
         <table class="result">
           <tr class="title">
             <td class="faintTxt">选项</td>
-            <td v-for="(v1, i1) in selectionData[i]">{{v1}}</td>
+            <td :key="i1" v-for="(v1, i1) in v">{{v1}}</td>
           </tr>
           <tr class="score">
             <td class="faintTxt">得分</td>

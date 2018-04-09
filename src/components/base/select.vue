@@ -1,64 +1,75 @@
 <template>
     <div>
         <ul class="selection">
-            <li :key="i1" v-for="(v1, i1) in select" @click="sortSelect(v1)" :class="{added: v1.initSelect}">{{v1.val}}</li>
+            <li :key="i1" v-for="(v1, i1) in item.select" @click="sortSelect(v1)" :class="{added: v1.initSelect}">{{v1.val}}</li>
         </ul>
         <table class="result">
             <tr class="title">
-            <td class="faintTxt">选项</td>
-            <td :key="i1" v-for="(v1, i1) in orderSelect">{{v1}}</td>
+              <td class="faintTxt">选项</td>
+              <td :key="i1" v-for="(v1, i1) in orderSelect">{{v1}}</td>
             </tr>
             <tr class="score">
-            <td class="faintTxt">得分</td>
-            <td>4</td>
-            <td>3</td>
-            <td>2</td>
-            <td>1</td>
+              <td class="faintTxt">得分</td>
+              <td>4</td>
+              <td>3</td>
+              <td>2</td>
+              <td>1</td>
             </tr>
         </table>
     </div>
 </template>
 
 <script>
-import data from "@/data/selection";
 export default {
   name: "indexPage",
+  props: {
+    item: {
+      type: Object,
+      default: null
+    }
+  },
   data() {
     return {
-        select: [
-            {
-                initSelect:false,
-                val:"很有权威",
-            },
-            {
-                initSelect:false,
-                val:"热情主动",
-            },
-            {
-                initSelect:false,
-                val:"情感敏锐",
-            },
-            {
-                initSelect:false,
-                val:"重视指示",
-            }
-        ],
-        orderSelect:[]
+      orderSelect: []
     };
   },
   methods: {
-    sortSelect(item){
-        if(!item.initSelect){
-            this.orderSelect.push(item.val);
-        }else{
-            const index = this.orderSelect.indexOf(item.val);
-            if(index > -1) this.orderSelect.splice(index,1);
-        } 
-        item.initSelect = !item.initSelect;
+    sortSelect(item) {
+      if (!item.initSelect) {
+        this.orderSelect.push(item.val);
+      } else {
+        const index = this.orderSelect.indexOf(item.val);
+        if (index > -1) this.orderSelect.splice(index, 1);
+      }
+      if (this.orderSelect.length === this.item.select.length) {
+        const scoreObj = this.getScore();
+        // console.log(scoreObj);
+        this.$emit("get-score", scoreObj);
+      }else{
+        const scoreNullObj = {
+          indexNum: this.item.indexNum,
+          eachScore: null
+        };
+        // console.log(scoreNullObj);
+        this.$emit("get-score", scoreNullObj);
+      }
+      item.initSelect = !item.initSelect;
+    },
+    getScore() {
+      const scoreDetailsObj = {};
+      this.item.select.forEach((v, i) => {
+        this.orderSelect.forEach((v1, i1, arr) => {
+          if (v1 === v.val) {
+            scoreDetailsObj[i] = arr.length - i1;
+          }
+        });
+      });
+      const scoreObj = {
+        indexNum: this.item.indexNum,
+        eachScore: scoreDetailsObj
+      };
+      return scoreObj;
     }
-  },
-  mounted() {
-    this.selectionData = data.selectionData;
   }
 };
 </script>
@@ -88,7 +99,7 @@ p {
   margin: 0 auto;
 }
 .result td {
-  min-width:60px;
+  min-width: 60px;
 }
 .score td,
 .title td {

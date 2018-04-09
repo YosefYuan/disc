@@ -213,7 +213,7 @@ const selectionData = [
 ]
 
 /* 结论数据 */
-const conclusion = [
+const conclusionData = [
   [
     '驱动者',
     '发起改变',
@@ -250,5 +250,5 @@ const conclusion = [
 
 export default {
   selectionData,
-  conclusion
+  conclusionData
 }

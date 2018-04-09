@@ -4,19 +4,21 @@
     <template v-for="(v, i) in selectionData">
       <div :key="i">
         <p :key="i" class="quesNum">第{{i + 1}}题</p>
-        <div class="errorState" v-if="scoreArr[i].selectSuccess === 0">请继续填写</div>
-        <div class="rightState" v-if="scoreArr[i].selectSuccess === 1">填写完毕</div>
+        <!-- <div class="rightState" v-if="completeSelectFlag[i]">填写完毕</div> -->
         <my-select :item="v" @get-score="pushScore"></my-select>
+        <div class="errorState" v-if="!completeSelectFlag[i]">请继续选择</div>
       </div>
     </template>
     <a @click="submitFn" class="submitBtn">提交</a>
+    <ul id="conclusion-wrapper" v-for="(v2,i2) in maxConclusionData">
+      <li>{{v2}}</li>
+    </ul>
   </div>
 </template>
 
 <script>
 import data from "@/data/selection";
 import MySelect from "@/components/base/select";
-import Vue from 'vue';
 
 export default {
   name: "indexPage",
@@ -27,46 +29,107 @@ export default {
     return {
       msg: `1、以下共有10题，每一题有四项选择。在这四项选择中，给你认为最能描述你的词句填上4分；给下一个3分；再次一个2分；给最不像你的描述填上1分。每一题中，分数不能相同，只能各为4，3，2，或1。`,
       selectionData: [],
-      scoreArr: []
+      maxConclusionData:[],
+      scoreArr: [],
+      completeSelectFlag: {
+        "0": true,
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true,
+        "5": true,
+        "6": true,
+        "7": true,
+        "8": true,
+        "9": true
+      }
     };
   },
   methods: {
     submitFn() {
-      this.$router.push({ path: "/result" });
+      // this.$router.push({ path: "/result" });
+      const flag = this.checkAll();
+      if (flag) {
+        this.getFourScores();
+        this.getConclusion();
+      }
     },
-    pushScore(scoreObj) {
-      console.dir(scoreObj);
-      var flag = false;
-      var index = 0;
-
-      for (let i = this.scoreArr.length - 1; i >= 0; i--) {
-        if (this.scoreArr[i].indexNum === scoreObj.indexNum) {
-          index = i;
-          break;
+    getFourScores() {
+      console.log("getFourScores");
+      this.fourItemScores = {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      };
+      this.scoreArr.forEach((v, i) => {
+        this.fourItemScores[0] += v.eachScore[0];
+        this.fourItemScores[1] += v.eachScore[1];
+        this.fourItemScores[2] += v.eachScore[2];
+        this.fourItemScores[3] += v.eachScore[3];
+      });
+      console.log(this.fourItemScores);
+    },
+    getConclusion() {
+      console.log("getConclusion");
+      const ScoresArr = Object.values(this.fourItemScores);
+      this.maxScore = Math.max.apply(null, ScoresArr);
+      this.maxScoreArr = [];
+      for(var key in this.fourItemScores){
+        if(this.fourItemScores[key] === this.maxScore){
+          this.maxScoreArr.push(key);
         }
       }
-      if (scoreObj.eachScore !== null) {
-        Vue.set(this.scoreArr[index], "eachScore", scoreObj.eachScore);
-        Vue.set(this.scoreArr[index], "selectSuccess", 1);
-      } else {
-        Vue.set(this.scoreArr[index], "eachScore", null);
-        Vue.set(this.scoreArr[index], "selectSuccess", 0);
+      // console.log(this.maxScoreArr);
+      this.maxScoreArr.map((v,i) => {
+        this.maxConclusionData.splice(i,1,this.conclusionData[i].join('; '));
+      });
+      // console.log(this.maxConclusionData);
+    },
+    checkAll() {
+      this.scoreArr.forEach((v, i) => {
+        if (v.eachScore === null) {
+          this.completeSelectFlag[i] = false;
+        }
+      });
+      const allFlags = Object.values(this.completeSelectFlag);
+      for (var i = 0; i < allFlags.length; i++) {
+        if (allFlags[i] === false) {
+          alert("请完成所有题目");
+          return false;
+        }
       }
-      this.$router.replace('/back');
-      this.$router.replace('/');
+      return true;
+    },
+    getIndex(itemObj) {
+      for (let i = this.scoreArr.length - 1; i >= 0; i--) {
+        if (this.scoreArr[i].indexNum === itemObj.indexNum) {
+          return i;
+        }
+      }
+    },
+    pushScore(scoreObj) {
+      var index = this.getIndex(scoreObj);
+      if (scoreObj.eachScore !== null) {
+        this.completeSelectFlag[index] = true;
+      } else {
+        this.completeSelectFlag[index] = false;
+      }
+      this.scoreArr[index].eachScore = scoreObj.eachScore;
       console.dir(this.scoreArr);
     },
     initState() {
       this.selectionData.forEach((v, i) => {
         this.scoreArr[i] = { indexNum: i };
         this.scoreArr[i].eachScore = null;
-        this.scoreArr[i].selectSuccess = 0;
       });
     }
   },
   created() {
     this.selectionData = data.selectionData;
+    this.conclusionData = data.conclusionData;
     this.initState();
+    console.log(this.conclusionData);
   }
 };
 </script>
@@ -122,5 +185,14 @@ p {
 }
 .rightState {
   color: #42b983;
+}
+
+#conclusion-wrapper{
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+    background: #42B983;
+    color: #fff;
+    padding: 3% 5%;
 }
 </style>

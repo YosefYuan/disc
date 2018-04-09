@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ msg }}</p>
+    <p class="ques-title">{{ msg }}</p>
     <template v-for="(v, i) in selectionData">
       <div :key="i">
         <p :key="i" class="quesNum">第{{i + 1}}题</p>
@@ -10,9 +10,12 @@
       </div>
     </template>
     <a @click="submitFn" class="submitBtn">提交</a>
-    <ul id="conclusion-wrapper" v-for="(v2,i2) in maxConclusionData">
-      <li>{{v2}}</li>
-    </ul>
+    <div id="conclusion-wrapper" v-if="maxConclusionData.length">
+      <p>测试结果</p>
+      <ul :key="i2" v-for="(v2,i2) in maxConclusionData">
+        <li>{{v2}}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -29,7 +32,7 @@ export default {
     return {
       msg: `1、以下共有10题，每一题有四项选择。在这四项选择中，给你认为最能描述你的词句填上4分；给下一个3分；再次一个2分；给最不像你的描述填上1分。每一题中，分数不能相同，只能各为4，3，2，或1。`,
       selectionData: [],
-      maxConclusionData:[],
+      maxConclusionData: [],
       scoreArr: [],
       completeSelectFlag: {
         "0": true,
@@ -75,14 +78,14 @@ export default {
       const ScoresArr = Object.values(this.fourItemScores);
       this.maxScore = Math.max.apply(null, ScoresArr);
       this.maxScoreArr = [];
-      for(var key in this.fourItemScores){
-        if(this.fourItemScores[key] === this.maxScore){
+      for (var key in this.fourItemScores) {
+        if (this.fourItemScores[key] === this.maxScore) {
           this.maxScoreArr.push(key);
         }
       }
       // console.log(this.maxScoreArr);
-      this.maxScoreArr.map((v,i) => {
-        this.maxConclusionData.splice(i,1,this.conclusionData[i].join('; '));
+      this.maxScoreArr.map((v, i) => {
+        this.maxConclusionData.splice(i, 1, this.conclusionData[i].join("; "));
       });
       // console.log(this.maxConclusionData);
     },
@@ -136,17 +139,24 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.ques-title {
+  text-align: left;
+  font-size: 0.9em;
+  padding: 0 5%;
+  color: #888;
+}
 ul {
   list-style-type: none;
   padding: 0;
 }
 li {
   display: inline-block;
-  margin: 0 5px;
+  margin: 0 2.5%;
+  width: 15%;
 }
 .selection li {
   background: #42b983;
-  padding: 2px 5px;
+  padding: 1% 2.5%;
   color: #fff;
 }
 p {
@@ -156,7 +166,7 @@ p {
   margin: 0 auto;
 }
 .result td {
-  padding: 0 3px;
+  padding: 0 5%;
 }
 .score td,
 .title td {
@@ -171,7 +181,7 @@ p {
   background: #42b983;
   color: #fff;
   width: 30%;
-  max-width: 100px;
+  max-width: 200px;
   margin: 20px auto;
   padding: 3px;
   font-weight: bold;
@@ -187,12 +197,16 @@ p {
   color: #42b983;
 }
 
-#conclusion-wrapper{
-    width: 80%;
-    margin: 0 auto;
-    text-align: left;
-    background: #42B983;
-    color: #fff;
-    padding: 3% 5%;
+#conclusion-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
+  background: #eeeeee;
+  color: #42b983;
+  padding: 3% 5%;
+}
+#conclusion-wrapper p {
+  font-weight: bold;
+  color: #000;
 }
 </style>

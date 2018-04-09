@@ -45,7 +45,7 @@ export default {
         const scoreObj = this.getScore();
         // console.log(scoreObj);
         this.$emit("get-score", scoreObj);
-      }else{
+      } else {
         const scoreNullObj = {
           indexNum: this.item.indexNum,
           eachScore: null
@@ -82,12 +82,16 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 5px;
+  margin: 0px 1%;
+  width: 20%;
 }
 .selection li {
-  background: #42b983;
-  padding: 2px 5px;
+  background: #42b982;
+  padding: 0.5% 1%;
   color: #fff;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  max-height: 50px;
 }
 li.added {
   background: #888;
@@ -97,6 +101,7 @@ p {
 }
 .result {
   margin: 0 auto;
+  width: 80%;
 }
 .result td {
   min-width: 60px;
@@ -114,7 +119,7 @@ p {
   background: #42b983;
   color: #fff;
   width: 30%;
-  max-width: 100px;
+  max-width: 200px;
   margin: 20px auto;
   padding: 3px;
   font-weight: bold;

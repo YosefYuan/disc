@@ -18,7 +18,7 @@ export default {
 body {
   padding: 0 5%;
   font-size: 14px;
-  background:#efefef;
+  background: #efefef;
 }
 #app {
   font-family: "microsoft YaHei", "Avenir", Helvetica, Arial, sans-serif;

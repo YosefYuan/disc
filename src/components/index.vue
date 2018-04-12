@@ -9,16 +9,16 @@
       </div>
     </template>
     <a @click="submitFn" class="submitBtn">提交</a>
-    <div id="conclusion-wrapper" v-if="maxConclusionData.length">
-      <!-- <p>测试结果</p> -->
+    <!-- <div id="conclusion-wrapper" v-if="maxConclusionData.length">
       <ul :key="i2" v-for="(v2,i2) in maxConclusionData">
         <li>{{v2}}</li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import bus from "@/data/bus";
 import data from "@/data/selection";
 import MySelect from "@/components/base/select";
 
@@ -49,13 +49,13 @@ export default {
   },
   methods: {
     submitFn() {
+      // this.$bus.$emit("myevent", this.maxConclusionData);
       const flag = this.checkAll();
       if (flag) {
         this.getFourScores();
         this.getConclusion();
-        // this.$router.push({ path: "/result" });
-        // console.log(this.maxConclusionData);
-        // this.$bus.$emit("my-event", this.maxConclusionData);
+        this.$router.push({ path: "/result" });
+        // bus.$emit("my-event", this.maxConclusionData);
       } else {
         alert("请完成所有题目");
       }
@@ -139,6 +139,9 @@ export default {
   created() {
     this.initState();
     // console.log(this.conclusionData);
+  },
+  destroyed() {
+    bus.$emit("my-event", this.maxConclusionData);
   }
 };
 </script>
@@ -182,7 +185,7 @@ ul {
 .errorState {
   color: rgb(238, 124, 72);
 }
-#conclusion-wrapper {
+/* #conclusion-wrapper {
   margin: 0 auto 20px;
   text-align: left;
   background: #fff;
@@ -201,5 +204,5 @@ ul {
 #conclusion-wrapper p {
   font-weight: bold;
   color: #000;
-}
+} */
 </style>

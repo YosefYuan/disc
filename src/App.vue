@@ -6,17 +6,32 @@
 
 <script>
 export default {
-  name: 'App'
+  name: "App"
 };
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  padding: 0 5%;
+  font-size: 14px;
+  background:#efefef;
+}
 #app {
-  font-family: "microsoft YaHei","Avenir", Helvetica, Arial, sans-serif;
+  font-family: "microsoft YaHei", "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 2em;
+}
+@media only screen and (min-width: 800px) {
+  #app {
+    width: 800px;
+    margin: 2em auto;
+  }
 }
 </style>

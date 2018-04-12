@@ -3,10 +3,13 @@
         <ul class="selection">
             <li :key="i1" v-for="(v1, i1) in item.select" @click="sortSelect(v1)" :class="{added: v1.initSelect}">{{v1.val}}</li>
         </ul>
-        <table class="result">
+        <ul class="selection selection-result">
+            <li :key="i2" v-for="(v2, i2) in orderSelectScores">{{v2}}</li>
+        </ul>
+        <!-- <table class="result">
             <tr class="title">
               <td class="faintTxt">选项</td>
-              <td :key="i1" v-for="(v1, i1) in orderSelect">{{v1}}</td>
+              <td :key="i3" v-for="(v3, i3) in orderSelect">{{v3}}</td>
             </tr>
             <tr class="score">
               <td class="faintTxt">得分</td>
@@ -15,7 +18,7 @@
               <td>2</td>
               <td>1</td>
             </tr>
-        </table>
+        </table> -->
     </div>
 </template>
 
@@ -30,7 +33,8 @@ export default {
   },
   data() {
     return {
-      orderSelect: []
+      orderSelect: [],
+      orderSelectScores: []
     };
   },
   methods: {
@@ -43,13 +47,15 @@ export default {
       }
       if (this.orderSelect.length === this.item.select.length) {
         const scoreObj = this.getScore();
-        // console.log(scoreObj);
+        this.orderSelectScores = Object.values(scoreObj.eachScore);
+        // console.log(this.orderSelectScores);
         this.$emit("get-score", scoreObj);
       } else {
         const scoreNullObj = {
           indexNum: this.item.indexNum,
           eachScore: null
         };
+        this.orderSelectScores = [];
         // console.log(scoreNullObj);
         this.$emit("get-score", scoreNullObj);
       }
@@ -83,7 +89,7 @@ ul {
 li {
   display: inline-block;
   margin: 0px 1%;
-  width: 20%;
+  width: 23%;
 }
 .selection li {
   background: #42b982;
@@ -92,14 +98,15 @@ li {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   max-height: 50px;
+  cursor: pointer;
+}
+.selection-result li {
+  background: #dd95b6;
 }
 li.added {
   background: #888;
 }
-p {
-  text-align: center;
-}
-.result {
+/* .result {
   margin: 0 auto;
   width: 80%;
 }
@@ -112,20 +119,5 @@ p {
 }
 .faintTxt {
   color: #888;
-}
-.submitBtn {
-  display: block;
-  text-align: center;
-  background: #42b983;
-  color: #fff;
-  width: 30%;
-  max-width: 200px;
-  margin: 20px auto;
-  padding: 3px;
-  font-weight: bold;
-}
-.quesNum {
-  padding: 0.2em 0;
-  background: #eee;
-}
+} */
 </style>

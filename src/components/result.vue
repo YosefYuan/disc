@@ -23,7 +23,7 @@ export default {
   created() {
     bus.$on("my-event", data => {
       this.maxConclusionData = data;
-      console.log(data);
+      // console.log(data);
     });
   },
   // methods: {

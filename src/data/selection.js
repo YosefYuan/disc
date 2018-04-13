@@ -44,174 +44,174 @@ const selectionData = [{
     }
   ]
 },
-// {
-//   indexNum: 2,
-//   select: [
-//     {
-//       initSelect: false,
-//       val: '意志坚定'
-//     },
-//     {
-//       initSelect: false,
-//       val: '目标远大'
-//     },
-//     {
-//       initSelect: false,
-//       val: '冷静稳重'
-//     },
-//     {
-//       initSelect: false,
-//       val: '坚持一贯'
-//     }
-//   ]
-// },
-// {
-//   indexNum: 3,
-//   select: [
-//     {
-//       initSelect: false,
-//       val: '雄心壮志'
-//     },
-//     {
-//       initSelect: false,
-//       val: '滔滔不绝'
-//     },
-//     {
-//       initSelect: false,
-//       val: '循例行事'
-//     },
-//     {
-//       initSelect: false,
-//       val: '可预测的'
-//     }
-//   ]
-// },
-// {
-//   indexNum: 4,
-//   select: [
-//     {
-//       initSelect: false,
-//       val: '具竞争力'
-//     },
-//     {
-//       initSelect: false,
-//       val: '乐于推广'
-//     },
-//     {
-//       initSelect: false,
-//       val: '不好改变'
-//     },
-//     {
-//       initSelect: false,
-//       val: '讲究实际'
-//     }
-//   ]
-// },
-// {
-//   indexNum: 5,
-//   select: [
-//     {
-//       initSelect: false,
-//       val: '挑战困难'
-//     },
-//     {
-//       initSelect: false,
-//       val: '善于社交'
-//     },
-//     {
-//       initSelect: false,
-//       val: '乐意配合'
-//     },
-//     {
-//       initSelect: false,
-//       val: '注重事实'
-//     }
-//   ]
-// },
-// {
-//   indexNum: 6,
-//   select: [
-//     {
-//       initSelect: false,
-//       val: '要求成果'
-//     },
-//     {
-//       initSelect: false,
-//       val: '欢愉开朗'
-//     },
-//     {
-//       initSelect: false,
-//       val: '避免对立'
-//     },
-//     {
-//       initSelect: false,
-//       val: '谨慎小心'
-//     }
-//   ]
-// },
-// {
-//   indexNum: 7,
-//   select: [
-//     {
-//       initSelect: false,
-//       val: '勇往直前'
-//     },
-//     {
-//       initSelect: false,
-//       val: '喜好变化'
-//     },
-//     {
-//       initSelect: false,
-//       val: '具同情心'
-//     },
-//     {
-//       initSelect: false,
-//       val: '完美主义'
-//     }
-//   ]
-// },
-// {
-//   indexNum: 8,
-//   select: [
-//     {
-//       initSelect: false,
-//       val: '果断坚决'
-//     },
-//     {
-//       initSelect: false,
-//       val: '想到就做'
-//     },
-//     {
-//       initSelect: false,
-//       val: '顾念他人'
-//     },
-//     {
-//       initSelect: false,
-//       val: '精益求精'
-//     }
-//   ]
-// },
-// {
-//   indexNum: 9,
-//   select: [
-//     {
-//       initSelect: false,
-//       val: '坚持已见'
-//     },
-//     {
-//       initSelect: false,
-//       val: '激励启发'
-//     },
-//     {
-//       initSelect: false,
-//       val: '和平调节'
-//     },
-//     {
-//       initSelect: false,
-//       val: '善于分析'
-//     }
-//   ]
-// }
+{
+  indexNum: 2,
+  select: [
+    {
+      initSelect: false,
+      val: '意志坚定'
+    },
+    {
+      initSelect: false,
+      val: '目标远大'
+    },
+    {
+      initSelect: false,
+      val: '冷静稳重'
+    },
+    {
+      initSelect: false,
+      val: '坚持一贯'
+    }
+  ]
+},
+{
+  indexNum: 3,
+  select: [
+    {
+      initSelect: false,
+      val: '雄心壮志'
+    },
+    {
+      initSelect: false,
+      val: '滔滔不绝'
+    },
+    {
+      initSelect: false,
+      val: '循例行事'
+    },
+    {
+      initSelect: false,
+      val: '可预测的'
+    }
+  ]
+},
+{
+  indexNum: 4,
+  select: [
+    {
+      initSelect: false,
+      val: '具竞争力'
+    },
+    {
+      initSelect: false,
+      val: '乐于推广'
+    },
+    {
+      initSelect: false,
+      val: '不好改变'
+    },
+    {
+      initSelect: false,
+      val: '讲究实际'
+    }
+  ]
+},
+{
+  indexNum: 5,
+  select: [
+    {
+      initSelect: false,
+      val: '挑战困难'
+    },
+    {
+      initSelect: false,
+      val: '善于社交'
+    },
+    {
+      initSelect: false,
+      val: '乐意配合'
+    },
+    {
+      initSelect: false,
+      val: '注重事实'
+    }
+  ]
+},
+{
+  indexNum: 6,
+  select: [
+    {
+      initSelect: false,
+      val: '要求成果'
+    },
+    {
+      initSelect: false,
+      val: '欢愉开朗'
+    },
+    {
+      initSelect: false,
+      val: '避免对立'
+    },
+    {
+      initSelect: false,
+      val: '谨慎小心'
+    }
+  ]
+},
+{
+  indexNum: 7,
+  select: [
+    {
+      initSelect: false,
+      val: '勇往直前'
+    },
+    {
+      initSelect: false,
+      val: '喜好变化'
+    },
+    {
+      initSelect: false,
+      val: '具同情心'
+    },
+    {
+      initSelect: false,
+      val: '完美主义'
+    }
+  ]
+},
+{
+  indexNum: 8,
+  select: [
+    {
+      initSelect: false,
+      val: '果断坚决'
+    },
+    {
+      initSelect: false,
+      val: '想到就做'
+    },
+    {
+      initSelect: false,
+      val: '顾念他人'
+    },
+    {
+      initSelect: false,
+      val: '精益求精'
+    }
+  ]
+},
+{
+  indexNum: 9,
+  select: [
+    {
+      initSelect: false,
+      val: '坚持已见'
+    },
+    {
+      initSelect: false,
+      val: '激励启发'
+    },
+    {
+      initSelect: false,
+      val: '和平调节'
+    },
+    {
+      initSelect: false,
+      val: '善于分析'
+    }
+  ]
+}
 ]
 
 /* 结论数据 */

@@ -50,12 +50,14 @@ export default {
   methods: {
     submitFn() {
       // this.$bus.$emit("myevent", this.maxConclusionData);
+      // console.log(Store.state.count);
+
       const flag = this.checkAll();
       if (flag) {
         this.getFourScores();
         this.getConclusion();
         this.$router.push({ path: "/result" });
-        // bus.$emit("my-event", this.maxConclusionData);
+        bus.$emit("my-event", this.maxConclusionData);
       } else {
         alert("请完成所有题目");
       }
@@ -150,8 +152,9 @@ export default {
 <style scoped>
 .ques-title {
   text-align: left;
-  font-size: 0.9em;
-  color: #888;
+  color: #444;
+  line-height: 1.5;
+  font-size: 0.8em;
 }
 .content {
   background: #fff;

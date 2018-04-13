@@ -101,7 +101,7 @@ li {
   cursor: pointer;
 }
 .selection-result li {
-  background: #dd95b6;
+  background: #666;
 }
 li.added {
   background: #888;

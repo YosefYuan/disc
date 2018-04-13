@@ -9,16 +9,11 @@
       </div>
     </template>
     <a @click="submitFn" class="submitBtn">提交</a>
-    <!-- <div id="conclusion-wrapper" v-if="maxConclusionData.length">
-      <ul :key="i2" v-for="(v2,i2) in maxConclusionData">
-        <li>{{v2}}</li>
-      </ul>
-    </div> -->
   </div>
 </template>
 
 <script>
-import bus from "@/data/bus";
+import store from "@/store";
 import data from "@/data/selection";
 import MySelect from "@/components/base/select";
 
@@ -49,21 +44,17 @@ export default {
   },
   methods: {
     submitFn() {
-      // this.$bus.$emit("myevent", this.maxConclusionData);
-      // console.log(Store.state.count);
-
       const flag = this.checkAll();
       if (flag) {
         this.getFourScores();
         this.getConclusion();
+        store.commit("transferAndShowConclusion", this.maxConclusionData);
         this.$router.push({ path: "/result" });
-        bus.$emit("my-event", this.maxConclusionData);
       } else {
         alert("请完成所有题目");
       }
     },
     getFourScores() {
-      // console.log("getFourScores");
       this.fourItemScores = {
         "0": 0,
         "1": 0,
@@ -76,10 +67,8 @@ export default {
         this.fourItemScores[2] += v.eachScore[2];
         this.fourItemScores[3] += v.eachScore[3];
       });
-      // console.log(this.fourItemScores);
     },
     getConclusion() {
-      // console.log("getConclusion");
       const ScoresArr = Object.values(this.fourItemScores);
       this.maxScore = Math.max.apply(null, ScoresArr);
       this.maxScoreArr = [];
@@ -88,12 +77,10 @@ export default {
           this.maxScoreArr.push(key);
         }
       }
-      // console.log(this.maxScoreArr);
       this.maxConclusionData = [];
       this.maxScoreArr.map((v, i) => {
         this.maxConclusionData.splice(i, 1, this.conclusionData[v].join("; "));
       });
-      // console.log(this.maxConclusionData);
     },
     checkAll() {
       this.scoreArr.forEach((v, i) => {
@@ -124,7 +111,6 @@ export default {
         this.completeSelectFlag[index] = false;
       }
       this.scoreArr[index].eachScore = scoreObj.eachScore;
-      // console.dir(this.scoreArr);
     },
     initState() {
       this.selectionData = data.selectionData;
@@ -138,12 +124,16 @@ export default {
       });
     }
   },
+  beforeRouteEnter(to, from, next) {
+    if (from.name == "resultPage") {
+      to.meta.isBack = true;
+    }else{
+      to.meta.isBack = false;
+    }
+    next();
+  },
   created() {
     this.initState();
-    // console.log(this.conclusionData);
-  },
-  destroyed() {
-    bus.$emit("my-event", this.maxConclusionData);
   }
 };
 </script>
@@ -188,24 +178,4 @@ ul {
 .errorState {
   color: rgb(238, 124, 72);
 }
-/* #conclusion-wrapper {
-  margin: 0 auto 20px;
-  text-align: left;
-  background: #fff;
-  color: #888;
-  padding: 3% 5%;
-  border-radius: 5px;
-  font-weight: bold;
-}
-#conclusion-wrapper li {
-  border-bottom: 1px dashed #eee;
-  padding: 0.5em 0;
-}
-#conclusion-wrapper ul:last-child li {
-  border: none;
-}
-#conclusion-wrapper p {
-  font-weight: bold;
-  color: #000;
-} */
 </style>

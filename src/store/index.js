@@ -4,12 +4,16 @@ import Vue from 'vue'
 Vue.use(Vuex)
 
 const state = {
-  count: 0
+  count: 0,
+  maxConclusionData: []
 }
 
 const mutations = {
-  INCREMENT (state) {
+  increment (state) {
     state.count++
+  },
+  transferAndShowConclusion (state, arr) {
+    state.maxConclusionData = arr
   }
 }
 

@@ -1,8 +1,7 @@
 <template>
   <div>
-    <p>{{ msg }}</p>
+    <p>测试结果</p>
     <div id="conclusion-wrapper" v-if="maxConclusionData.length">
-      <!-- <p>测试结果</p> -->
       <ul :key="i2" v-for="(v2,i2) in maxConclusionData">
         <li>{{v2}}</li>
       </ul>
@@ -11,40 +10,27 @@
 </template>
 
 <script>
-import bus from "@/data/bus";
+import store from "@/store";
 export default {
   name: "resultPage",
   data() {
     return {
-      msg: `测试结果`,
       maxConclusionData: []
     };
   },
   created() {
-    bus.$on("my-event", data => {
-      this.maxConclusionData = data;
-      // console.log(data);
-    });
-  },
-  // methods: {
-  //   handleMyEvent(eventData) {
-  //     console.log(1234);
-  //     console.log(eventData);
-  //     this.msg = eventData;
-  //   }
-  // }
-  beforeDestroy() {
-    bus.$off("my-event");
+    this.maxConclusionData = [];
+    this.maxConclusionData = store.state.maxConclusionData;
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-p{
+p {
   line-height: 2;
   font-weight: bold;
-  color:#000;
+  color: #000;
   font-size: 1.2em;
 }
 #conclusion-wrapper {

@@ -6,19 +6,6 @@
         <ul class="selection selection-result">
             <li :key="i2" v-for="(v2, i2) in orderSelectScores">{{v2}}</li>
         </ul>
-        <!-- <table class="result">
-            <tr class="title">
-              <td class="faintTxt">选项</td>
-              <td :key="i3" v-for="(v3, i3) in orderSelect">{{v3}}</td>
-            </tr>
-            <tr class="score">
-              <td class="faintTxt">得分</td>
-              <td>4</td>
-              <td>3</td>
-              <td>2</td>
-              <td>1</td>
-            </tr>
-        </table> -->
     </div>
 </template>
 
@@ -48,7 +35,6 @@ export default {
       if (this.orderSelect.length === this.item.select.length) {
         const scoreObj = this.getScore();
         this.orderSelectScores = Object.values(scoreObj.eachScore);
-        // console.log(this.orderSelectScores);
         this.$emit("get-score", scoreObj);
       } else {
         const scoreNullObj = {
@@ -56,7 +42,6 @@ export default {
           eachScore: null
         };
         this.orderSelectScores = [];
-        // console.log(scoreNullObj);
         this.$emit("get-score", scoreNullObj);
       }
       item.initSelect = !item.initSelect;
@@ -106,18 +91,4 @@ li {
 li.added {
   background: #888;
 }
-/* .result {
-  margin: 0 auto;
-  width: 80%;
-}
-.result td {
-  min-width: 60px;
-}
-.score td,
-.title td {
-  font-size: 0.8em;
-}
-.faintTxt {
-  color: #888;
-} */
 </style>

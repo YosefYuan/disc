@@ -2,8 +2,8 @@
   <div>
     <p>测试结果</p>
     <div id="conclusion-wrapper" v-if="maxConclusionData.length">
-      <ul :key="i2" v-for="(v2,i2) in maxConclusionData">
-        <li>{{v2}}</li>
+      <ul :key="i" v-for="(v,i) in maxConclusionData">
+        <li v-html="v"></li>
       </ul>
     </div>
   </div>
@@ -45,7 +45,9 @@ p {
 #conclusion-wrapper li {
   list-style-type: none;
   border-bottom: 1px dashed #eee;
-  padding: 0.5em 0;
+  padding: 1em 0;
+  text-align: center;
+  line-height: 2;
 }
 #conclusion-wrapper ul:last-child li {
   border: none;

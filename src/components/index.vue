@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="ques-title">{{ title }}</p>
+    <p class="ques-title" v-html="title"></p>
     <template v-for="(v, i) in selectionData">
       <div :key="i" class="content">
         <p :key="i" class="quesNum">第{{i + 1}}题</p>
@@ -79,7 +79,7 @@ export default {
       }
       this.maxConclusionData = [];
       this.maxScoreArr.map((v, i) => {
-        this.maxConclusionData.splice(i, 1, this.conclusionData[v].join("; "));
+        this.maxConclusionData.splice(i, 1, this.conclusionData[v].join("<br>"));
       });
     },
     checkAll() {

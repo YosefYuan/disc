@@ -218,7 +218,7 @@ const selectionData = [{
 /* 结论数据 */
 const conclusionData = [
   [
-    '驱动者',
+    '带领者',
     '发起改变',
     '结果、挑战',
     '办成事情',
@@ -250,9 +250,17 @@ const conclusionData = [
     '做抉择'
   ]
 ]
-
+const conclusionDetailTitle = [
+  '特点',
+  '对他人的价值',
+  '驱动力',
+  '强项',
+  '弱项',
+  '进步途径'
+]
 export default {
   selectionData,
   conclusionData,
+  conclusionDetailTitle,
   title
 }

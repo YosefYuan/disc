@@ -79,8 +79,16 @@ export default {
       }
       this.maxConclusionData = [];
       this.maxScoreArr.map((v, i) => {
-        this.maxConclusionData.splice(i, 1, this.conclusionData[v].join("<br>"));
+        this.maxConclusionData.push(this.conclusionData[v]);
       });
+      console.log(this.maxConclusionData);
+      // this.maxScoreArr.map((v, i) => {
+      //   this.maxConclusionData.splice(
+      //     i,
+      //     1,
+      //     this.conclusionData[v].join("<br>")
+      //   );
+      // });
     },
     checkAll() {
       this.scoreArr.forEach((v, i) => {
@@ -127,7 +135,7 @@ export default {
   beforeRouteEnter(to, from, next) {
     if (from.name == "resultPage") {
       to.meta.isBack = true;
-    }else{
+    } else {
       to.meta.isBack = false;
     }
     next();
